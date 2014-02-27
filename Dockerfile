@@ -55,7 +55,7 @@ RUN mkdir -p /var/log/supervisor
 
 
 ## USER
-#RUN useradd -d /var/www/app --no-create-home -g www-data user
+RUN useradd -d /var/www/app --no-create-home -g www-data user
 
 # SSH
 #ADD ./config/authorized_keys /root/.ssh/
