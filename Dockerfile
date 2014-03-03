@@ -49,6 +49,7 @@ ENV APACHE_RUN_GROUP www-data
 ADD ./config/php5/fpm/php.ini /etc/php5/fpm/php.ini
 ADD ./config/php5/fpm/php-fpm.conf /etc/php5/fpm/php-fpm.conf
 ADD ./config/php5/fpm/pool.d/www.conf /etc/php5/fpm/pool.d/www.conf
+ADD ./config/php5/mods-available/opcache.ini /etc/php5/mods-available/opcache.ini
 
 # Supervisord
 RUN mkdir -p /var/log/supervisor
