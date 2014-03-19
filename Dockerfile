@@ -10,6 +10,9 @@ RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -s
 
 RUN apt-get -y update
 
+## USER
+RUN useradd -d /var/www/app --no-create-home -g www-data user
+
 # BASICS
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q vim nano curl git make wget build-essential g++ sendmail
 
@@ -28,6 +31,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q\
   php5-mcrypt php5-gd php5-mysql php5-curl php5-json\
   memcached php5-memcached\
   imagemagick graphicsmagick graphicsmagick-libmagick-dev-compat php5-imagick
+RUN mkdir -p /var/log/app; chmod 664 /var/log/app/; chown user:www-data /var/log/app/
 
 RUN pecl install memcache; 
 ADD ./config/php5/mods-available/memcache.ini /etc/php5/mods-available/memcache.ini
@@ -54,9 +58,6 @@ ADD ./config/php5/mods-available/opcache.ini /etc/php5/mods-available/opcache.in
 # Supervisord
 RUN mkdir -p /var/log/supervisor
 
-
-## USER
-RUN useradd -d /var/www/app --no-create-home -g www-data user
 
 # SSH
 #ADD ./config/authorized_keys /root/.ssh/
