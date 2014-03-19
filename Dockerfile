@@ -28,7 +28,6 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q\
   php5-mcrypt php5-gd php5-mysql php5-curl php5-json\
   memcached php5-memcached\
   imagemagick graphicsmagick graphicsmagick-libmagick-dev-compat php5-imagick
-RUN mkdir -p /var/log/app; chmod 664 /var/log/app/; chown user:www-data /var/log/app/
 
 RUN pecl install memcache; 
 ADD ./config/php5/mods-available/memcache.ini /etc/php5/mods-available/memcache.ini
@@ -47,6 +46,8 @@ ADD ./config/apache2/mods-enabled/mod-securty.conf /etc/apache2/mods-enabled/mod
 ADD ./config/apache2/sites-available/default /etc/apache2/sites-available/default
 ADD ./config/modsecurity/modsecurity.conf /etc/modsecurity/modsecurity.conf
 ADD ./config/apache2/mods-enabled/pagespeed.conf /etc/apache2/mods-enabled/pagespeed.conf
+RUN mkdir -p /var/log/app; chmod 664 /var/log/app/; chown user:www-data /var/log/app/
+
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
 
