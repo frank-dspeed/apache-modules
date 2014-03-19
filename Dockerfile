@@ -61,25 +61,6 @@ RUN mkdir -p /var/log/supervisor
 
 
 # SSH
-#ADD ./config/authorized_keys /root/.ssh/
-#ADD ./config/ssh/ssh_host_dsa_key /etc/ssh/ssh_host_dsa_key
-#ADD ./config/ssh/ssh_host_dsa_key.pub /etc/ssh/ssh_host_dsa_key.pub
-#ADD ./config/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_ecdsa_key
-#ADD ./config/ssh/ssh_host_ecdsa_key.pub /etc/ssh/ssh_host_ecdsa_key.pub
-#ADD ./config/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_rsa_key
-#ADD ./config/ssh/ssh_host_rsa_key.pub /etc/ssh/ssh_host_rsa_key.pub
-#RUN chmod 600 /etc/ssh/ssh_host_dsa_key /etc/ssh/ssh_host_ecdsa_key /etc/ssh/ssh_host_rsa_key /root/.ssh/authorized_keys; mkdir -p /var/run/sshd
-#RUN chmod 700 /root/.ssh && chown -R root /root/.ssh
+ADD ./config/ssh/sshd_config /etc/ssh/sshd_config
 
-#ADD config/supervisord.conf /etc/supervisord.conf
-
-# PORTS
-#EXPOSE 80 22
-#ENV RUNNABLE_USER_DIR /var/www/app
-
-## START
-#ADD config/run.sh /
-#RUN chmod +x /run.sh
-
-#ENTRYPOINT ["/run.sh"]
 
