@@ -10,9 +10,6 @@ RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -s
 
 RUN apt-get -y update
 
-## USER
-RUN useradd -d /var/www/app --no-create-home -g www-data user
-
 # BASICS
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q vim nano curl git make wget build-essential g++ sendmail
 
@@ -38,6 +35,9 @@ ADD ./config/php5/mods-available/memcache.ini /etc/php5/mods-available/memcache.
 RUN /usr/sbin/php5enmod memcache
 
 ## CONFIG
+# USER
+RUN useradd -d /var/www/app --no-create-home -g www-data user
+
 # Apache + PHP-FPM
 RUN a2enmod actions fastcgi alias headers deflate rewrite; a2dismod autoindex
 RUN wget -q https://dl-ssl.google.com/dl/linux/direct/mod-pagespeed-stable_current_amd64.deb; sudo dpkg -i mod-pagespeed-*.deb; apt-get -f install; rm mod-pagespeed-*.deb
