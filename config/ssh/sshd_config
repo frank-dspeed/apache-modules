@@ -77,8 +77,8 @@ ClientAliveCountMax 0
 # Allow client to pass locale environment variables
 AcceptEnv LANG LC_*
 
-#Subsystem sftp /usr/lib/openssh/sftp-server
-Subsystem sftp internal-sftp
+Subsystem sftp /usr/lib/openssh/sftp-server
+#Subsystem sftp internal-sftp
 
 AllowUsers user root
 
@@ -93,8 +93,8 @@ AllowUsers user root
 # and ChallengeResponseAuthentication to 'no'.
 UsePAM yes
 
-Match User user
-#     ChrootDirectory /var/www
-     X11Forwarding no
-     AllowTcpForwarding no
-     ForceCommand internal-sftp
+#Match User user
+##     ChrootDirectory /var/www
+#     X11Forwarding no
+#     AllowTcpForwarding no
+#     ForceCommand internal-sftp
