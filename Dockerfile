@@ -27,7 +27,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q\
   php5-fpm php5 php5-cli php5-dev php-pear php5-common php5-apcu\
   php5-mcrypt php5-gd php5-mysql php5-curl php5-json\
   memcached php5-memcached\
-  imagemagick graphicsmagick graphicsmagick-libmagick-dev-compat php5-imagick
+  imagemagick graphicsmagick graphicsmagick-libmagick-dev-compat php5-imagick trimage
 
 RUN pecl install memcache; 
 ADD ./config/php5/mods-available/memcache.ini /etc/php5/mods-available/memcache.ini
