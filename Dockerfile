@@ -46,7 +46,7 @@ ADD ./config/apache2/mods-enabled/mod-securty.conf /etc/apache2/mods-enabled/mod
 ADD ./config/apache2/sites-available/default /etc/apache2/sites-available/default
 ADD ./config/modsecurity/modsecurity.conf /etc/modsecurity/modsecurity.conf
 ADD ./config/apache2/mods-enabled/pagespeed.conf /etc/apache2/mods-enabled/pagespeed.conf
-RUN mkdir -p /var/log/app; chmod 664 /var/log/app/; chown user:www-data /var/log/app/
+RUN mkdir -p /var/log/app; chmod 664 /var/log/app/; chown user:www-data /var/log/app/; chown www-data: -R /var/lib/apache2/fastcgi
 
 ENV APACHE_RUN_USER www-data
 ENV APACHE_RUN_GROUP www-data
