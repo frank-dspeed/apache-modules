@@ -4,7 +4,7 @@ FROM ubuntu:precise
 # REPOS
 RUN apt-get -y update && locale-gen en_GB.UTF-8
 RUN apt-get install -y -q python-software-properties
-RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
+# RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) multiverse"
 RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-updates multiverse"
 
@@ -17,7 +17,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q vim nano curl git subve
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q\
   apache2-mpm-worker libapache2-mod-fastcgi libapache2-modsecurity
 
-RUN echo apache2-mpm-worker hold | sudo dpkg --set-selections
+RUN echo apache2-mpm-worker hold | dpkg --set-selections
 
 ## PHP
 RUN add-apt-repository -y ppa:ondrej/php5; apt-get -y update
