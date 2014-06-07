@@ -12,7 +12,7 @@ RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -s
 RUN apt-get -y update
 
 # BASICS
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q vim nano curl git subversion make wget build-essential g++ sendmail logrotate
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q vim nano curl git subversion make wget build-essential g++ sendmail unzip logrotate
 
 ## APACHE
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q\
