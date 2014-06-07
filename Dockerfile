@@ -3,6 +3,7 @@ FROM ubuntu:precise
 
 # REPOS
 RUN apt-get -y update && locale-gen en_GB.UTF-8
+RUN echo "Europe/London" | tee /etc/timezone; dpkg-reconfigure --frontend noninteractive tzdata
 RUN apt-get install -y -q python-software-properties
 # RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
 RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) multiverse"
