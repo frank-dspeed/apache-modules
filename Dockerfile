@@ -36,7 +36,7 @@ RUN /usr/sbin/php5enmod memcache
 
 ## CONFIG
 # USER
-RUN useradd -d /var/www/app --no-create-home -g www-data user
+RUN useradd -d /var/www/app --no-create-home -g www-data -G adm user
 
 # Apache + PHP-FPM
 RUN a2enmod actions fastcgi alias headers deflate rewrite; a2dismod autoindex
