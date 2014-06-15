@@ -43,7 +43,7 @@ RUN a2enmod actions fastcgi alias headers deflate rewrite; a2dismod autoindex
 RUN wget -q https://dl-ssl.google.com/dl/linux/direct/mod-pagespeed-stable_current_amd64.deb; sudo dpkg -i mod-pagespeed-*.deb; apt-get -f install; rm mod-pagespeed-*.deb
 ADD ./config/apache2/apache2.conf /etc/apache2/apache2.conf
 ADD ./config/apache2/envvars /etc/apache2/envvars
-ADD ./config/apache2/mods-enabled/mod-securty.conf /etc/apache2/mods-enabled/mod-securty.conf
+ADD ./config/apache2/mods-enabled/mod-security.conf /etc/apache2/mods-enabled/mod-security.conf
 ADD ./config/apache2/sites-available/default /etc/apache2/sites-available/default
 ADD ./config/modsecurity/modsecurity.conf /etc/modsecurity/modsecurity.conf
 ADD ./config/apache2/mods-enabled/pagespeed.conf /etc/apache2/mods-enabled/pagespeed.conf
