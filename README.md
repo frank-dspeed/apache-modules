@@ -1,2 +1,2 @@
-lamp55-joomla
+Fork From Pawels Joomla Container Because he did good apache setup 
 =============
