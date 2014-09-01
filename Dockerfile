@@ -1,36 +1,30 @@
 # runnable base
-FROM ubuntu:precise
+FROM dockerimages/ubuntu-core:14.04
 
 # REPOS
 RUN apt-get -y update && locale-gen en_GB.UTF-8
 RUN echo "Europe/London" | tee /etc/timezone; dpkg-reconfigure --frontend noninteractive tzdata
-RUN apt-get install -y -q python-software-properties
+
+RUN apt-get install python-software-properties
 # RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) universe"
-RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) multiverse"
-RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-updates multiverse"
+#RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) multiverse"
+#RUN add-apt-repository -y "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc)-updates multiverse"
 
-RUN apt-get -y update
-
-# BASICS
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q vim nano curl git subversion make wget build-essential g++ sendmail unzip logrotate
-
-## APACHE
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q\
-  apache2-mpm-worker libapache2-mod-fastcgi libapache2-modsecurity
-
-RUN echo apache2-mpm-worker hold | dpkg --set-selections
-
-## PHP
-RUN add-apt-repository -y ppa:ondrej/php5; apt-get -y update
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -q\
-  openssh-server supervisor\
-  cron\
-  php5-fpm php5 php5-cli php5-dev php-pear php5-common php5-apcu\
-  php5-mcrypt php5-gd php5-mysql php5-curl php5-json\
-  memcached php5-memcached\
-  imagemagick graphicsmagick graphicsmagick-libmagick-dev-compat php5-imagick trimage
-
-RUN pecl install memcache; 
+RUN apt-get update \
+ && echo "## Basics" \
+ && apt-get install -y -q vim nano curl git subversion make wget build-essential g++ sendmail unzip logrotate \
+ && echo "## Apache" \
+ && apt-get install apache2-mpm-worker libapache2-mod-fastcgi libapache2-modsecurity \
+ && echo apache2-mpm-worker hold | dpkg --set-selections \
+ && echo "## PHP-FPM + MEMCACHED + ImageMagick" \
+ && apt-get install \
+    openssh-server supervisor\
+    cron\
+    php5-fpm php5 php5-cli php5-dev php-pear php5-common php5-apcu\
+    php5-mcrypt php5-gd php5-mysql php5-curl php5-json\
+    memcached php5-memcached\
+    imagemagick graphicsmagick graphicsmagick-libmagick-dev-compat php5-imagick trimage \
+ && pecl install memcache; 
 ADD ./config/php5/mods-available/memcache.ini /etc/php5/mods-available/memcache.ini
 RUN /usr/sbin/php5enmod memcache
 
@@ -60,8 +54,5 @@ ADD ./config/php5/mods-available/opcache.ini /etc/php5/mods-available/opcache.in
 # Supervisord
 RUN mkdir -p /var/log/supervisor
 
-
 # SSH
 ADD ./config/ssh/sshd_config /etc/ssh/sshd_config
-
-
